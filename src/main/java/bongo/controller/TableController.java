@@ -138,9 +138,7 @@ public class TableController
     }
 
     @PostMapping({"query/table/addPost", "query/addPost"})
-    public String addPost(
-            @ModelAttribute("tableRowModel")
-                    TableRowModel tableRowModel, RedirectAttributes redirectAttributes, Model model) throws SQLException,
+    public String addPost(@ModelAttribute("tableRowModel") TableRowModel tableRowModel, RedirectAttributes redirectAttributes, Model model) throws SQLException,
             URISyntaxException
     {
         ResultSet rs = dataBaseService.getResultSet("SELECT * FROM " + tableRowModel.getTableName());

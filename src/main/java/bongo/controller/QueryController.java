@@ -63,7 +63,7 @@ public class QueryController
         if(isQueryForbidden(customQueryModel.getCustomQuery()))
         {
             result.addError(new ObjectError("query", "Forbidden quesry"));
-            return "main";
+            return "redirect:query";
         }
         if (customQueryModel.getCustomQuery().toLowerCase().contains("insert") || customQueryModel.getCustomQuery().toLowerCase().contains("update") || customQueryModel.getCustomQuery().toLowerCase().contains("drop")) {
             try {
