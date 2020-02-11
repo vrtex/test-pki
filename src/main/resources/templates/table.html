@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>PKS Project</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Bongo</a>
+    <div class="navbar-collapse collapse">
+        <ul th:if="${#session}" class="nav navbar-nav">
+            <li class="navbar" th:if="${#session.getAttribute('email')}"><a href="/logout">Log out</a></li>
+            <li  id="email" style="color: white" class="navbar-center" th:text="${#session.getAttribute('email')}"> </li>
+        </ul>
+    </div>
+</nav>
+
+
+<main role="main" class="container">
+    <h1>Result</h1>
+    <a href="/query">Back to querry</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th:block th:each="columnName : ${columnNames}">
+                    <th th:text="${columnName}"></th>
+                </th:block>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iStat  : ${content}">
+            <th:block th:each="column :${row}">
+                <th th:text="${column}"></th>
+            </th:block>
+            <th:block th:if="${!isCustom}">
+                <th><a th:href="@{./edit(id=${iStat.index+1},tableName=${tableName})}">edit</a></th>
+                <th><a th:href="@{./remove(id=${iStat.index+1},tableName=${tableName})}">remove</a></th>
+            </th:block>
+        </tr>
+        </tbody>
+    </table>
+    <strong><a th:if="${!isCustom}" th:href="@{./add(tableName=${tableName})}">add</a></strong>
+</main>
+</body>
+</html>

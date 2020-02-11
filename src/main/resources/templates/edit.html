@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>PKS Project</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Bongo</a>
+    <div class="navbar-collapse collapse">
+        <ul th:if="${#session}" class="nav navbar-nav">
+            <li class="navbar" th:if="${#session.getAttribute('email')}"><a href="/logout">Log out</a></li>
+            <li  id="email" style="color: white" class="navbar-center" th:text="${#session.getAttribute('email')}"> </li>
+        </ul>
+    </div>
+</nav>
+
+
+<main role="main" class="container">
+    <h1 th:text="${tableName}"></h1>
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+        <strong>Error!</strong> <p th:text="${error}"></p>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th:block th:each="columnName : ${tableRowModel.getValues().keySet()}">
+                <th th:text="${columnName}"></th>
+            </th:block>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <form th:action="${action}"  th:object="${tableRowModel}" method="post">
+                <th:block th:each="entry,iStat :${tableRowModel.values.entrySet()}">
+                    <th><input type="text" class="form-control" th:field="*{values[__${entry.key}__]}"></th>
+                </th:block>
+                <input type="hidden" class="form-control" th:field="*{tableName}" th:value="*{tableName}">
+                <input type="hidden" class="form-control" th:field="*{id}" th:value="*{id}">
+                <th><button type="submit"class="btn btn-primary">submit</button></th>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

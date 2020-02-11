@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>PKS Project</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Bongo</a>
+    <div class="navbar-collapse collapse">
+        <ul th:if="${#session}" class="nav navbar-nav">
+            <li class="navbar" th:if="${#session.getAttribute('email')}"><a href="/logout">Log out</a></li>
+            <li  id="email" style="color: white" class="navbar-center" th:text="${#session.getAttribute('email')}"> </li>
+        </ul>
+    </div>
+</nav>
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <h1>Select table to view, or type a SQL query</h1>
+    </div>
+
+    <form th:action="@{/query/select}" th:object="${selectTableModel}" method="post">
+        <div class="form-group">
+            <label for="stm">Select</label>
+            <select class="form-control" th:field="${selectTableModel.name}" id="stm">
+                <th:block th:each="tableName : ${tables}">
+                    <option th:value="${tableName}" th:text="${tableName}"></option>
+                </th:block>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+
+    <div th:if="${updateSuccess}" class="alert alert-success alert-dismissible fade show">
+        <strong>Success!</strong><h6 th:text="${updateSuccess}"></h6>
+    </div>
+    <form th:action="@{/query/custom}" th:object="${customQueryModel}" method="post">
+        <div th:if="${#fields.hasErrors()}" th:each="error : ${#fields.errors()}">
+            <div class="alert alert-danger alert-dismissible fade show">
+                <strong>Error!</strong> <p th:text="${error}"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cqm">Type query</label>
+            <textarea class="form-control" rows="5" cols="20" th:field="${customQueryModel.customQuery}" id="cqm"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</main>
+</body>
+</html>

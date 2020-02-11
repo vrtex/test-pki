@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="springPKI-master" />
+        <module name="springPKI" />
+        <module name="pki-test" />
+        <module name="projekt" />
+        <module name="testSpring" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="pki-test" options="-parameters" />
+      <module name="springPKI" options="-parameters" />
+      <module name="springPKI-master" options="-parameters" />
+      <module name="testSpring" options="-parameters" />
+    </option>
+  </component>
+</project>
