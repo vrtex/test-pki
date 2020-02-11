@@ -21,6 +21,8 @@ import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/query")
@@ -58,6 +60,11 @@ public class QueryController
     @PostMapping("/custom")
     public String postCustomQuery(@Validated @ModelAttribute CustomQueryModel customQueryModel, BindingResult result, Model model, RedirectAttributes redirectAttributes) throws SQLException
     {
+        if(isQueryForbidden(customQueryModel.getCustomQuery()))
+        {
+            result.addError(new ObjectError("query", "Forbidden quesry"));
+            return "main";
+        }
         if (customQueryModel.getCustomQuery().toLowerCase().contains("insert") || customQueryModel.getCustomQuery().toLowerCase().contains("update") || customQueryModel.getCustomQuery().toLowerCase().contains("drop")) {
             try {
                 dataBaseService.insertUpdateQuery(customQueryModel.getCustomQuery());
@@ -93,6 +100,13 @@ public class QueryController
                 return handleErrors(model, result, e);
             }
         }
+    }
+
+    private boolean isQueryForbidden(String query)
+    {
+        Pattern regex = Pattern.compile("select .* from .* users");
+        Matcher matcher = regex.matcher(query);
+        return matcher.matches();
     }
 
     String handleErrors(Model model, BindingResult result, Exception e) throws SQLException

@@ -28,7 +28,7 @@ public class LoginController
     {
         model.addAttribute("loginModel", new LoginModel());
         model.addAttribute("registerModel", new RegisterModel());
-        return "main"; //view
+        return "main";
     }
 
     @PostMapping("/")

@@ -54,6 +54,11 @@
             <label for="cqm">Type query</label>
             <textarea class="form-control" rows="5" cols="20" th:field="${customQueryModel.customQuery}" id="cqm"/>
         </div>
+        <div th:if="${#fields.hasErrors()}" th:each="error : ${#fields.errors()}">
+            <div class="alert alert-danger alert-dismissible fade show">
+                <strong>Error!</strong> <p th:text="${error}"></p>
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary">Send</button>
     </form>
 </main>

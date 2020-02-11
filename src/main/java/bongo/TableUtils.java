@@ -19,17 +19,6 @@ public class TableUtils
         return columns;
     }
 
-    public static ArrayList<String> getColumnTypes(ResultSet resultSet) throws SQLException
-    {
-        ResultSetMetaData metaData = resultSet.getMetaData();
-
-        ArrayList<String> columns = new ArrayList<>();
-        for (int i = 0; i < metaData.getColumnCount(); i++) {
-            columns.add(metaData.getColumnTypeName(i + 1));
-        }
-        return columns;
-    }
-
     public static ArrayList<ArrayList<String>> getRows(ResultSet resultSet) throws SQLException
     {
         ArrayList<ArrayList<String>> rows = new ArrayList<>();
