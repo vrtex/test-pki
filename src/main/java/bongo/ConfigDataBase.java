@@ -19,6 +19,9 @@ public class ConfigDataBase {
 
     public void config() throws SQLException {
 
+        System.out.println("Got uri: " + env.getProperty("spring.datasource.url"));
+        System.out.println("Got user: " + env.getProperty("spring.datasource.data-username"));
+        System.out.println("Got pass: " + env.getProperty("spring.datasource.data-password"));
 
         basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(env.getProperty("spring.datasource.url"));

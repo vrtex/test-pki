@@ -53,6 +53,7 @@ public class LoginController
                 result.addError(new ObjectError("email", "User with email: " + registerModel.getEmail() + " already exist"));
         } catch (Exception e) {
             result.addError(new ObjectError("email", "Database connection problem"));
+            System.out.println("DB exception: " + e.getMessage());
         }
         if (result.hasErrors()) {
             model.addAttribute("loginModel", new LoginModel());
