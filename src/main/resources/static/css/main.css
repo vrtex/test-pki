@@ -1,13 +1,15 @@
 body {
+    color: white;
+    background: #1d2229;
     padding-top: 5rem;
 }
-.starter-template {
+.generic-header {
     padding: 3rem 1.5rem;
     text-align: left;
 }
 
 h1{
-    color:#0000FF;
+    color:#D0BC50;
 }
 
 h2{

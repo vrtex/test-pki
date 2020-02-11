@@ -61,10 +61,7 @@ public class QueryController
     public String postCustomQuery(@Validated @ModelAttribute CustomQueryModel customQueryModel, BindingResult result, Model model, RedirectAttributes redirectAttributes) throws SQLException
     {
         if(isQueryForbidden(customQueryModel.getCustomQuery()))
-        {
-            result.addError(new ObjectError("query", "Forbidden quesry"));
             return "redirect:/query";
-        }
         if (customQueryModel.getCustomQuery().toLowerCase().contains("insert") || customQueryModel.getCustomQuery().toLowerCase().contains("update") || customQueryModel.getCustomQuery().toLowerCase().contains("drop")) {
             try {
                 dataBaseService.insertUpdateQuery(customQueryModel.getCustomQuery());
