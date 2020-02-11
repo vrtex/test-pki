@@ -27,11 +27,11 @@ public class TableController
     @Autowired
     DataBaseService dataBaseService;
 
-    @GetMapping("query/table")
+    @GetMapping("/")
     public String viewTable(Model model, HttpSession session) throws SQLException, URISyntaxException
     {
-        if (session.getAttribute("email") == null)
-            return "redirect:/";
+//        if (session.getAttribute("email") == null)
+//            return "redirect:/";
         return "table";
     }
 

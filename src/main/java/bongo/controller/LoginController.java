@@ -23,7 +23,7 @@ public class LoginController
     @Autowired
     DataBaseService dataBaseService;
 
-    @GetMapping("/")
+    @GetMapping("/aaa")
     public String loginForm(Model model, @ModelAttribute LoginModel loginModel, @ModelAttribute RegisterModel registerModel)
     {
         model.addAttribute("loginModel", new LoginModel());
@@ -31,10 +31,10 @@ public class LoginController
         return "main"; //view
     }
 
-    @PostMapping("/")
+    @PostMapping("/aaa")
     public String loginModelSubmit(@Validated @ModelAttribute LoginModel loginModel, BindingResult result, final RedirectAttributes redirectAttributes, Model model, HttpSession session) throws URISyntaxException, SQLException
     {
-        if (dataBaseService.checkUserLogin(loginModel.getEmail(), loginModel.getPassword()) || true) {
+        if (dataBaseService.checkUserLogin(loginModel.getEmail(), loginModel.getPassword())) {
             session.setAttribute("email", loginModel.getEmail());
             return "redirect:/query";
         }
