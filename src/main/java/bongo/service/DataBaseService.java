@@ -71,4 +71,10 @@ public class DataBaseService
         Statement stmt = configDataBase.dataSource();
         stmt.executeUpdate(query);
     }
+
+    public void createUsersTable() throws SQLException
+    {
+        Statement stmt = configDataBase.dataSource();
+        stmt.executeQuery("CREATE TABLE users (email varchar, password varchar)");
+    }
 }

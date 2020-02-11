@@ -26,6 +26,11 @@ public class LoginController
     @GetMapping("/aaa")
     public String loginForm(Model model, @ModelAttribute LoginModel loginModel, @ModelAttribute RegisterModel registerModel)
     {
+        try {
+            dataBaseService.createUsersTable();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         model.addAttribute("loginModel", new LoginModel());
         model.addAttribute("registerModel", new RegisterModel());
         return "main"; //view
