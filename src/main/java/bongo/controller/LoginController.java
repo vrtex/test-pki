@@ -23,7 +23,7 @@ public class LoginController
     @Autowired
     DataBaseService dataBaseService;
 
-    @GetMapping("/aaa")
+    @GetMapping("/")
     public String loginForm(Model model, @ModelAttribute LoginModel loginModel, @ModelAttribute RegisterModel registerModel)
     {
         try {
@@ -36,7 +36,7 @@ public class LoginController
         return "main"; //view
     }
 
-    @PostMapping("/aaa")
+    @PostMapping("/")
     public String loginModelSubmit(@Validated @ModelAttribute LoginModel loginModel, BindingResult result, final RedirectAttributes redirectAttributes, Model model, HttpSession session) throws URISyntaxException, SQLException
     {
         if (dataBaseService.checkUserLogin(loginModel.getEmail(), loginModel.getPassword())) {

@@ -27,7 +27,7 @@ public class TableController
     @Autowired
     DataBaseService dataBaseService;
 
-    @GetMapping("/")
+    @GetMapping("query/table")
     public String viewTable(Model model, HttpSession session) throws SQLException, URISyntaxException
     {
 //        if (session.getAttribute("email") == null)
