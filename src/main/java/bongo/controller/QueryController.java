@@ -104,7 +104,7 @@ public class QueryController
 
     private boolean isQueryForbidden(String query)
     {
-        Pattern regex = Pattern.compile("select .* from .* users");
+        Pattern regex = Pattern.compile("select.*from.*users");
         Matcher matcher = regex.matcher(query);
         return matcher.matches();
     }
