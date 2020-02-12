@@ -8,15 +8,15 @@
         <outputRelativeToContentRoot value="true" />
         <module name="springPKI-master" />
         <module name="springPKI" />
-        <module name="bongo" />
-        <module name="testSpring" />
+        <module name="pki-test" />
         <module name="projekt" />
+        <module name="testSpring" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="bongo" options="-parameters" />
+      <module name="pki-test" options="-parameters" />
       <module name="springPKI" options="-parameters" />
       <module name="springPKI-master" options="-parameters" />
       <module name="testSpring" options="-parameters" />

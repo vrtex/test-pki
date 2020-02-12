@@ -13,10 +13,7 @@ h1{
 }
 
 h2{
-    background: #28374f;
-    padding-left: 10px;
-    width: min-content;
-    padding-right: 10px;
+    color:#FF0000;
 }
 #li{
     color:#0000FF;
