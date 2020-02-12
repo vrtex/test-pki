@@ -47,12 +47,12 @@ public class QueryController
     @PostMapping("/select")
     public String postQuery(@Validated @ModelAttribute SelectTableModel selectTableModel, BindingResult result, Model model) throws URISyntaxException, SQLException
     {
-        ResultSet rs = dataBaseService.getResultSet(("SELECT * FROM " + selectTableModel.getName()));
+        ResultSet rs = dataBaseService.getResultSet(("SELECT * FROM " + selectTableModel.getTableName()));
         ArrayList<ArrayList<String>> rows = TableUtils.getRows(rs);
         ArrayList<String> columnNames = TableUtils.getColumnNames(rs);
         model.addAttribute("columnNames", columnNames);
         model.addAttribute("content", rows);
-        model.addAttribute("tableName", selectTableModel.getName());
+        model.addAttribute("tableName", selectTableModel.getTableName());
         model.addAttribute("isCustom", false);
         return "table";
     }
@@ -61,7 +61,7 @@ public class QueryController
     public String postCustomQuery(@Validated @ModelAttribute CustomQueryModel customQueryModel, BindingResult result, Model model, RedirectAttributes redirectAttributes) throws SQLException
     {
         if(isQueryForbidden(customQueryModel.getCustomQuery()))
-            return "redirect:/query";
+            return handleErrors(model, result, new Exception("that's an illegal query. Not nice"));
         if (customQueryModel.getCustomQuery().toLowerCase().contains("insert") || customQueryModel.getCustomQuery().toLowerCase().contains("update") || customQueryModel.getCustomQuery().toLowerCase().contains("drop")) {
             try {
                 dataBaseService.insertUpdateQuery(customQueryModel.getCustomQuery());
