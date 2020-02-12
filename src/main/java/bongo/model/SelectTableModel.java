@@ -2,15 +2,15 @@ package bongo.model;
 
 public class SelectTableModel
 {
-    public String getTableName()
+    public String getName()
     {
-        return tableName;
+        return name;
     }
 
-    public void setTableName(String tableName)
+    public void setName(String name)
     {
-        this.tableName = tableName;
+        this.name = name;
     }
 
-    String tableName;
+    String name;
 }

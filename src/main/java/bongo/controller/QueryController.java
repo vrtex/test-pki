@@ -47,12 +47,12 @@ public class QueryController
     @PostMapping("/select")
     public String postQuery(@Validated @ModelAttribute SelectTableModel selectTableModel, BindingResult result, Model model) throws URISyntaxException, SQLException
     {
-        ResultSet rs = dataBaseService.getResultSet(("SELECT * FROM " + selectTableModel.getTableName()));
+        ResultSet rs = dataBaseService.getResultSet(("SELECT * FROM " + selectTableModel.getName()));
         ArrayList<ArrayList<String>> rows = TableUtils.getRows(rs);
         ArrayList<String> columnNames = TableUtils.getColumnNames(rs);
         model.addAttribute("columnNames", columnNames);
         model.addAttribute("content", rows);
-        model.addAttribute("tableName", selectTableModel.getTableName());
+        model.addAttribute("tableName", selectTableModel.getName());
         model.addAttribute("isCustom", false);
         return "table";
     }
